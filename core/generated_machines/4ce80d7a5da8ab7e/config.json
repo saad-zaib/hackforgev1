@@ -1,0 +1,39 @@
+{
+  "machine_id": "4ce80d7a5da8ab7e",
+  "blueprint_id": "sqli_001",
+  "variant": "Error-based SQLi",
+  "difficulty": 2,
+  "seed": "api_generated_sqli_001_1768499796",
+  "application": {
+    "context": "search_functionality",
+    "variant": "Error-based SQLi",
+    "entry_point": "cookie_value"
+  },
+  "constraints": {
+    "filters": [
+      {
+        "type": "single_quote",
+        "description": "Single_quote filtering",
+        "php_code": "$input = str_replace('s', '', $input);",
+        "python_code": "input = input.replace('s', '')"
+      }
+    ]
+  },
+  "flag": {
+    "content": "HACKFORGE{a197f614122c106033394a34fc7c1fb2}",
+    "location": "/var/www/html/flag.txt"
+  },
+  "behavior": {
+    "output": "direct_echo"
+  },
+  "metadata": {
+    "exploit_hints": [
+      "Context: search_functionality",
+      "Difficulty: 2/5",
+      "\u26a0\ufe0f Filters active: single_quote",
+      "\ud83d\udca1 Try basic payloads first"
+    ],
+    "vulnerability_type": "Error-based SQLi",
+    "estimated_solve_time": "20-30 minutes"
+  }
+}

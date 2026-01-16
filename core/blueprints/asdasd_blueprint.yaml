@@ -1,0 +1,27 @@
+blueprint_id: asdasd
+
+name: 
+
+category: asdasd
+
+difficulty_range: [1, 5]
+
+description: |
+  
+
+variants:
+
+
+entry_points:
+
+
+mutation_axes:
+  filters:
+    basic:
+    medium:
+    advanced:
+  contexts:
+  sinks:
+  encoding:
+    - none
+  output_contexts:

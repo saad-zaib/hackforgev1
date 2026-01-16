@@ -1,0 +1,161 @@
+#!/bin/bash
+
+# Hackforge Control Script
+# Central command for all Hackforge operations
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+show_banner() {
+    echo ""
+    echo "╔═══════════════════════════════════════════════════════════╗"
+    echo "║                      HACKFORGE                            ║"
+    echo "║          Dynamic Vulnerability Training Platform          ║"
+    echo "╚═══════════════════════════════════════════════════════════╝"
+    echo ""
+}
+
+show_usage() {
+    show_banner
+    echo "Usage: ./hackforge <command>"
+    echo ""
+    echo "Commands:"
+    echo ""
+    echo "  📦 GENERATION"
+    echo "    generate         Generate new vulnerable machines"
+    echo "    template         Convert configs to applications"
+    echo ""
+    echo "  🐳 DOCKER OPERATIONS"
+    echo "    start            Build and start all machines"
+    echo "    stop             Stop all running machines"
+    echo "    restart          Restart all machines"
+    echo "    destroy          Remove all containers"
+    echo "    status           Show machine status"
+    echo "    logs             Show logs (add -f to follow)"
+    echo "    build            Build images only"
+    echo ""
+    echo "  📊 INFORMATION"
+    echo "    list             List all available machines"
+    echo "    info             Show project information"
+    echo ""
+    echo "  🧹 CLEANUP"
+    echo "    clean            Clean generated files"
+    echo "    reset            Full reset (careful!)"
+    echo ""
+    echo "Examples:"
+    echo "  ./hackforge generate       # Generate new machines"
+    echo "  ./hackforge start          # Start all machines"
+    echo "  ./hackforge status         # Check running machines"
+    echo "  ./hackforge logs -f        # Follow logs"
+    echo ""
+}
+
+case "$1" in
+    generate)
+        show_banner
+        echo "🎲 Generating vulnerable machines..."
+        cd "$SCRIPT_DIR/core"
+        python3 generator.py
+        ;;
+    
+    template)
+        show_banner
+        echo "🔨 Converting configs to applications..."
+        cd "$SCRIPT_DIR/core"
+        python3 template_engine.py
+        ;;
+    
+    start|stop|restart|destroy|status|logs|build)
+        cd "$SCRIPT_DIR/docker/orchestrator"
+        python3 orchestrator.py "$@"
+        ;;
+    
+    list)
+        cd "$SCRIPT_DIR/docker/orchestrator"
+        python3 orchestrator.py list
+        ;;
+    
+    info)
+        show_banner
+        echo "📍 Project Location: $SCRIPT_DIR"
+        echo ""
+        echo "📂 Directory Structure:"
+        echo "  core/               - Blueprint and generation engine"
+        echo "  docker/             - Container orchestration"
+        echo "  web/                - Web API and frontend"
+        echo "  cli/                - Command-line tools"
+        echo ""
+        echo "🔧 Components Status:"
+        
+        if [ -d "$SCRIPT_DIR/core/generated_machines" ]; then
+            machine_count=$(find "$SCRIPT_DIR/core/generated_machines" -name "config.json" | wc -l)
+            echo "  ✓ Generated machines: $machine_count"
+        else
+            echo "  ✗ No machines generated yet"
+        fi
+        
+        if command -v docker &> /dev/null; then
+            echo "  ✓ Docker installed"
+        else
+            echo "  ✗ Docker not found"
+        fi
+        
+        if command -v docker-compose &> /dev/null; then
+            echo "  ✓ Docker Compose installed"
+        else
+            echo "  ✗ Docker Compose not found"
+        fi
+        
+        echo ""
+        ;;
+    
+    clean)
+        show_banner
+        echo "🧹 Cleaning generated files..."
+        
+        read -p "Remove generated machines? (y/n): " confirm
+        if [ "$confirm" = "y" ]; then
+            rm -rf "$SCRIPT_DIR/core/generated_machines"
+            echo "✓ Cleaned generated_machines/"
+        fi
+        
+        read -p "Remove campaigns? (y/n): " confirm
+        if [ "$confirm" = "y" ]; then
+            rm -rf "$SCRIPT_DIR/core/campaigns"
+            echo "✓ Cleaned campaigns/"
+        fi
+        
+        echo "✓ Cleanup complete"
+        ;;
+    
+    reset)
+        show_banner
+        echo "⚠️  WARNING: This will:"
+        echo "  - Stop and remove all containers"
+        echo "  - Delete all generated machines"
+        echo "  - Delete all campaigns"
+        echo ""
+        read -p "Are you SURE? Type 'RESET' to confirm: " confirm
+        
+        if [ "$confirm" = "RESET" ]; then
+            echo ""
+            echo "Stopping containers..."
+            cd "$SCRIPT_DIR/docker/orchestrator"
+            python3 orchestrator.py destroy 2>/dev/null
+            
+            echo "Removing generated files..."
+            rm -rf "$SCRIPT_DIR/core/generated_machines"
+            rm -rf "$SCRIPT_DIR/core/campaigns"
+            
+            echo ""
+            echo "✅ Full reset complete!"
+            echo "Run './hackforge generate' to start fresh"
+        else
+            echo "Cancelled"
+        fi
+        ;;
+    
+    *)
+        show_usage
+        exit 0
+        ;;
+esac

@@ -1,0 +1,39 @@
+{
+  "machine_id": "bbdd5e6a34d456a3",
+  "blueprint_id": "path_001",
+  "variant": "Encoded Path Traversal",
+  "difficulty": 2,
+  "seed": "user_default_path_001_1768494982_2",
+  "application": {
+    "context": "file_viewer",
+    "variant": "Encoded Path Traversal",
+    "entry_point": "image_display"
+  },
+  "constraints": {
+    "filters": [
+      {
+        "type": "dot_dot_slash",
+        "description": "Dot_dot_slash filtering",
+        "php_code": "$input = str_replace('d', '', $input);",
+        "python_code": "input = input.replace('d', '')"
+      }
+    ]
+  },
+  "flag": {
+    "content": "HACKFORGE{0e61f8c7e0b47e2d5e956d570a2b343c}",
+    "location": "/var/www/html/flag.txt"
+  },
+  "behavior": {
+    "output": "direct_echo"
+  },
+  "metadata": {
+    "exploit_hints": [
+      "Context: file_viewer",
+      "Difficulty: 2/5",
+      "\u26a0\ufe0f Filters active: dot_dot_slash",
+      "\ud83d\udca1 Try basic payloads first"
+    ],
+    "vulnerability_type": "Encoded Path Traversal",
+    "estimated_solve_time": "20-30 minutes"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "vulnerability_id": "sqli_001",
+  "name": "SQL Injection",
+  "category": "sql_injection",
+  "difficulty_range": [
+    1,
+    5
+  ],
+  "description": "SQL Injection vulnerabilities occur when untrusted user input is directly incorporated into SQL queries without proper sanitization or parameterization. Attackers can manipulate database queries to access, modify, or delete data, bypass authentication, or execute administrative operations.",
+  "variants": [
+    "Error-based SQLi",
+    "Union-based SQLi",
+    "Blind SQLi",
+    "Time-based Blind SQLi"
+  ],
+  "entry_points": [
+    "http_get_param",
+    "http_post_param",
+    "cookie_value",
+    "http_header",
+    "url_path"
+  ],
+  "mutation_axes": {
+    "filters": {
+      "basic": [
+        "single_quote"
+      ],
+      "medium": [
+        "single_quote"
+      ],
+      "advanced": [
+        "single_quote"
+      ]
+    },
+    "contexts": [
+      "login_form"
+    ],
+    "sinks": [
+      "mysql_query"
+    ],
+    "encoding": [
+      "none"
+    ],
+    "output_contexts": [
+      "error_message"
+    ]
+  },
+  "variant_configs": [
+    {
+      "name": "Error-based SQLi",
+      "parameters": [
+        {
+          "name": "context",
+          "axis": "context",
+          "default": "search_functionality"
+        }
+      ]
+    }
+  ]
+}

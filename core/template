@@ -1,0 +1,236 @@
+"""
+Cross-Site Scripting Vulnerability Templates
+Generates vulnerable applications for cross-site scripting
+"""
+
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
+
+from templates.base_template import BaseTemplate
+from typing import Dict
+
+
+class CrossSiteScriptingTemplate(BaseTemplate):
+    """
+    Template generator for cross-site scripting vulnerabilities
+    """
+    
+    def generate_code(self) -> str:
+        """Generate vulnerable application based on variant"""
+        
+        variant = self.config.variant
+        
+        if variant == "Reflected XSS":
+            return self._generate_reflected_xss()
+        elif variant == "Stored XSS":
+            return self._generate_stored_xss()
+        elif variant == "DOM-based XSS":
+            return self._generate_dom_based_xss()
+        else:
+            return self._generate_reflected_xss()
+    
+    def _generate_reflected_xss(self) -> str:
+        """Generate Reflected XSS vulnerable application"""
+        
+        app = self.config.application
+        constraints = self.config.constraints
+        
+        context = app.get('context', 'default')
+        filters = constraints.get('filters', [])
+        
+        filter_code = self._generate_filter_code(filters, 'php')
+        
+        # Custom vulnerable code for Reflected XSS
+        php_code = f'''<?php
+/**
+ * Hackforge Machine: {self.machine_id}
+ * Vulnerability: Reflected XSS
+ * Context: {context}
+ */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reflected XSS</title>
+    <style>
+        body { font-family: monospace; background: #1a1a2e; color: #eee; padding: 20px; }
+        .container { max-width: 900px; margin: 50px auto; background: rgba(15, 32, 39, 0.9); 
+                     border-radius: 15px; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reflected XSS</h1>
+        <form method="GET">
+            <input type="text" name="input">
+            <button type="submit">Submit</button>
+        </form>
+        
+        <?php
+        if (isset($_GET['input'])) {
+            $input = $_GET['input'];
+            {filter_code}
+            // Vulnerable processing
+        }
+        ?>
+    </div>
+</body>
+</html>'''
+        
+        return php_code
+
+    def _generate_stored_xss(self) -> str:
+        """Generate Stored XSS vulnerable application"""
+        
+        app = self.config.application
+        constraints = self.config.constraints
+        
+        context = app.get('context', 'default')
+        filters = constraints.get('filters', [])
+        
+        filter_code = self._generate_filter_code(filters, 'php')
+        
+        # Custom vulnerable code for Stored XSS
+        php_code = f'''<?php
+/**
+ * Hackforge Machine: {self.machine_id}
+ * Vulnerability: Stored XSS
+ * Context: {context}
+ */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stored XSS</title>
+    <style>
+        body { font-family: monospace; background: #1a1a2e; color: #eee; padding: 20px; }
+        .container { max-width: 900px; margin: 50px auto; background: rgba(15, 32, 39, 0.9); 
+                     border-radius: 15px; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stored XSS</h1>
+        <form method="GET">
+            <input type="text" name="input">
+            <button type="submit">Submit</button>
+        </form>
+        
+        <?php
+        if (isset($_GET['input'])) {
+            $input = $_GET['input'];
+            {filter_code}
+            // Vulnerable processing
+        }
+        ?>
+    </div>
+</body>
+</html>'''
+        
+        return php_code
+
+    def _generate_dom_based_xss(self) -> str:
+        """Generate DOM-based XSS vulnerable application"""
+        
+        app = self.config.application
+        constraints = self.config.constraints
+        
+        context = app.get('context', 'default')
+        filters = constraints.get('filters', [])
+        
+        filter_code = self._generate_filter_code(filters, 'php')
+        
+        # Custom vulnerable code for DOM-based XSS
+        php_code = f'''<?php
+/**
+ * Hackforge Machine: {self.machine_id}
+ * Vulnerability: DOM-based XSS
+ * Context: {context}
+ */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM-based XSS</title>
+    <style>
+        body { font-family: monospace; background: #1a1a2e; color: #eee; padding: 20px; }
+        .container { max-width: 900px; margin: 50px auto; background: rgba(15, 32, 39, 0.9); 
+                     border-radius: 15px; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DOM-based XSS</h1>
+        <form method="GET">
+            <input type="text" name="input">
+            <button type="submit">Submit</button>
+        </form>
+        
+        <?php
+        if (isset($_GET['input'])) {
+            $input = $_GET['input'];
+            {filter_code}
+            // Vulnerable processing
+        }
+        ?>
+    </div>
+</body>
+</html>'''
+        
+        return php_code
+
+    
+    def _generate_filter_code(self, filters: list, language: str) -> str:
+        """Generate filter code from filter list"""
+        if not filters:
+            return ""
+        
+        if language == 'php':
+            return "\n            ".join([f['php_code'] for f in filters])
+        elif language == 'python':
+            return "\n    ".join([f['python_code'] for f in filters])
+        
+        return ""
+    
+    def generate_dockerfile(self) -> str:
+        """Generate Dockerfile for cross-site scripting vulnerabilities"""
+        
+        variant = self.config.variant
+        
+        if variant == "Reflected XSS":
+            return '''FROM php:8.0-apache
+
+RUN apt-get update && apt-get install -y iputils-ping whois dnsutils
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
+'''
+        elif variant == "Stored XSS":
+            return '''FROM php:8.0-apache
+
+RUN apt-get update && apt-get install -y iputils-ping whois dnsutils
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
+'''
+        elif variant == "DOM-based XSS":
+            return '''FROM php:8.0-apache
+
+RUN apt-get update && apt-get install -y iputils-ping whois dnsutils
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
+'''
+        else:
+            return '''FROM php:8.0-apache
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
+'''

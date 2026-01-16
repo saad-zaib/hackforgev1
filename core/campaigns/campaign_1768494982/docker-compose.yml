@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+
+  bbdd5e6a34d456a3:
+    build: ./bbdd5e6a34d456a3
+    container_name: hackforge_bbdd5e6a34d456a3
+    ports:
+      - "8080:80"
+    volumes:
+      - ./bbdd5e6a34d456a3/app:/var/www/html
+      - ./bbdd5e6a34d456a3/flag.txt:/var/www/html/flag.txt:ro
+    environment:
+      - MACHINE_ID=bbdd5e6a34d456a3
+      - FLAG_LOCATION=/var/www/html/flag.txt
+    restart: unless-stopped
+
+  33b22dd52b2d9512:
+    build: ./33b22dd52b2d9512
+    container_name: hackforge_33b22dd52b2d9512
+    ports:
+      - "8081:80"
+    volumes:
+      - ./33b22dd52b2d9512/app:/var/www/html
+      - ./33b22dd52b2d9512/flag.txt:/var/www/html/flag.txt:ro
+    environment:
+      - MACHINE_ID=33b22dd52b2d9512
+      - FLAG_LOCATION=/var/www/html/flag.txt
+    restart: unless-stopped
+
+  50f2114508234b0b:
+    build: ./50f2114508234b0b
+    container_name: hackforge_50f2114508234b0b
+    ports:
+      - "8082:80"
+    volumes:
+      - ./50f2114508234b0b/app:/var/www/html
+      - ./50f2114508234b0b/flag.txt:/var/www/html/flag.txt:ro
+    environment:
+      - MACHINE_ID=50f2114508234b0b
+      - FLAG_LOCATION=/var/www/html/flag.txt
+    restart: unless-stopped

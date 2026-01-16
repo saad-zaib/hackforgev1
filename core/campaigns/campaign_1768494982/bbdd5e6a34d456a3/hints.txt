@@ -1,0 +1,9 @@
+Machine: bbdd5e6a34d456a3
+Variant: Encoded Path Traversal
+Difficulty: 2/5
+
+Hints:
+  • Context: file_viewer
+  • Difficulty: 2/5
+  • ⚠️ Filters active: dot_dot_slash
+  • 💡 Try basic payloads first

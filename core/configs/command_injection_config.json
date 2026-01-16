@@ -1,0 +1,53 @@
+{
+  "vulnerability_id": "cmdi_001",
+  "name": "Command Injection",
+  "category": "command_injection",
+  "difficulty_range": [
+    1,
+    5
+  ],
+  "description": "Command Injection vulnerabilities occur when an application passes unsafe user-supplied data to a system shell. Attackers can execute arbitrary commands on the host operating system, potentially leading to complete system compromise.",
+  "variants": [
+    "Direct Command Injection"
+  ],
+  "entry_points": [
+    "http_get_param"
+  ],
+  "mutation_axes": {
+    "filters": {
+      "basic": [
+        "semicolon"
+      ],
+      "medium": [
+        "semicolon"
+      ],
+      "advanced": [
+        "semicolon"
+      ]
+    },
+    "contexts": [
+      "ping_utility"
+    ],
+    "sinks": [
+      "system"
+    ],
+    "encoding": [
+      "none"
+    ],
+    "output_contexts": [
+      "command_output"
+    ]
+  },
+  "variant_configs": [
+    {
+      "name": "Direct Command Injection",
+      "parameters": [
+        {
+          "name": "context",
+          "axis": "context",
+          "default": "ping_utility"
+        }
+      ]
+    }
+  ]
+}

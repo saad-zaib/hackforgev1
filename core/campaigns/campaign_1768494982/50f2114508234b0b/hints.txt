@@ -1,0 +1,9 @@
+Machine: 50f2114508234b0b
+Variant: Reflected XSS
+Difficulty: 2/5
+
+Hints:
+  • Context: message_board
+  • Difficulty: 2/5
+  • ⚠️ Filters active: script_tag, onerror
+  • 💡 Try basic payloads first

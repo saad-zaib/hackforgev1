@@ -1,0 +1,9 @@
+Machine: ede42b9d75c01512
+Variant: Reflected XSS
+Difficulty: 2/5
+
+Hints:
+  • Context: user_profile
+  • Difficulty: 2/5
+  • ⚠️ Filters active: script_tag, onerror
+  • 💡 Try basic payloads first

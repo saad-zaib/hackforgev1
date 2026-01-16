@@ -1,0 +1,33 @@
+blueprint_id: cmdi_002
+
+name: Command 
+
+category: command_inject
+
+difficulty_range: [1, 5]
+
+description: |
+  Command 
+
+variants:
+  - Direct 
+
+entry_points:
+  - http_post_param
+
+mutation_axes:
+  filters:
+    basic:
+      - pipe
+    medium:
+      - pipe
+    advanced:
+      - pipe
+  contexts:
+    - image_processor
+  sinks:
+    - shell_exec
+  encoding:
+    - double_url_encoding
+  output_contexts:
+    - http_response

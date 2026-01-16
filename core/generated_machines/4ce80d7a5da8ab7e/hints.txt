@@ -1,0 +1,10 @@
+Machine: 4ce80d7a5da8ab7e
+Name: Unknown
+Variant: Error-based SQLi
+Difficulty: 2/5
+
+Hints:
+  • Context: search_functionality
+  • Difficulty: 2/5
+  • ⚠️ Filters active: single_quote
+  • 💡 Try basic payloads first

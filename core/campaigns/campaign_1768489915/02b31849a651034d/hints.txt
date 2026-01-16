@@ -1,0 +1,9 @@
+Machine: 02b31849a651034d
+Variant: Reflected XSS
+Difficulty: 2/5
+
+Hints:
+  • Context: user_profile
+  • Difficulty: 2/5
+  • ⚠️ Filters active: script_tag, onerror
+  • 💡 Try basic payloads first

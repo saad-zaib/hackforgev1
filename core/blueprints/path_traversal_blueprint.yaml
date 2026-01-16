@@ -1,0 +1,35 @@
+blueprint_id: path_001
+
+name: Path Traversal
+
+category: path_traversal
+
+difficulty_range: [1, 5]
+
+description: |
+  Path traversal vulnerabilities allow attackers to access files outside the intended directory by manipulating file paths with sequences like ../ (dot-dot-slash).
+
+variants:
+  - Basic Path Traversal
+  - Encoded Path Traversal
+
+entry_points:
+  - file_view
+  - image_display
+  - document_download
+
+mutation_axes:
+  filters:
+    basic:
+      - dot_dot_slash
+    medium:
+    advanced:
+  contexts:
+    - file_viewer
+    - image_gallery
+    - document_portal
+    - log_viewer
+  sinks:
+  encoding:
+    - none
+  output_contexts:

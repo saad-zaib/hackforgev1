@@ -1,0 +1,45 @@
+{
+  "machine_id": "ede42b9d75c01512",
+  "blueprint_id": "xss_001",
+  "variant": "Reflected XSS",
+  "difficulty": 2,
+  "seed": "user_default_xss_001_1768488870_2",
+  "application": {
+    "context": "user_profile",
+    "variant": "Reflected XSS",
+    "entry_point": "http_header"
+  },
+  "constraints": {
+    "filters": [
+      {
+        "type": "script_tag",
+        "description": "Script_tag filtering",
+        "php_code": "$input = str_replace('s', '', $input);",
+        "python_code": "input = input.replace('s', '')"
+      },
+      {
+        "type": "onerror",
+        "description": "Onerror filtering",
+        "php_code": "$input = str_replace('o', '', $input);",
+        "python_code": "input = input.replace('o', '')"
+      }
+    ]
+  },
+  "flag": {
+    "content": "HACKFORGE{747a27b3deb22b7ff04d58e641983890}",
+    "location": "/var/www/html/flag.txt"
+  },
+  "behavior": {
+    "output": "direct_echo"
+  },
+  "metadata": {
+    "exploit_hints": [
+      "Context: user_profile",
+      "Difficulty: 2/5",
+      "\u26a0\ufe0f Filters active: script_tag, onerror",
+      "\ud83d\udca1 Try basic payloads first"
+    ],
+    "vulnerability_type": "Reflected XSS",
+    "estimated_solve_time": "20-30 minutes"
+  }
+}

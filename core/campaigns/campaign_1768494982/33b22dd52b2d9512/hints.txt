@@ -1,0 +1,9 @@
+Machine: 33b22dd52b2d9512
+Variant: Error-based SQLi
+Difficulty: 2/5
+
+Hints:
+  • Context: login_form
+  • Difficulty: 2/5
+  • ⚠️ Filters active: single_quote
+  • 💡 Try basic payloads first

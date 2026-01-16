@@ -1,0 +1,64 @@
+blueprint_id: xss_001
+
+name: Cross-Site Scripting
+
+category: cross_site_scripting
+
+difficulty_range: [1, 5]
+
+description: |
+  XSS vulnerabilities occur when untrusted data is included in a web page without proper validation or escaping. Attackers can inject malicious scripts that execute in victim's browsers.
+
+variants:
+  - Reflected XSS
+  - Stored XSS
+  - DOM-based XSS
+
+entry_points:
+  - http_get_param
+  - http_post_param
+  - url_fragment
+  - cookie_value
+  - http_header
+
+mutation_axes:
+  filters:
+    basic:
+      - script_tag
+      - onerror
+    medium:
+      - script_tag
+      - onerror
+      - onclick
+      - javascript_protocol
+    advanced:
+      - script_tag
+      - onerror
+      - onclick
+      - javascript_protocol
+      - angle_brackets
+      - quotes
+  contexts:
+    - comment_section
+    - search_box
+    - user_profile
+    - message_board
+    - feedback_form
+  sinks:
+    - innerHTML
+    - document_write
+    - eval
+    - location_href
+    - element_attribute
+  encoding:
+    - none
+    - html_entities
+    - url_encoding
+    - base64
+    - unicode_escape
+  output_contexts:
+    - html_body
+    - html_attribute
+    - javascript_context
+    - css_context
+    - url_context

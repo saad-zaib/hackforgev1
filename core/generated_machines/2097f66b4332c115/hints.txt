@@ -1,0 +1,10 @@
+Machine: 2097f66b4332c115
+Name: Unknown
+Variant: Direct
+Difficulty: 2/5
+
+Hints:
+  • Context: ping_utility
+  • Difficulty: 2/5
+  • ⚠️ Filters active: pipe
+  • 💡 Try basic payloads first

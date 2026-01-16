@@ -1,0 +1,39 @@
+{
+  "machine_id": "7cb3bfb42c21139d",
+  "blueprint_id": "cmdi_001",
+  "variant": "Direct Command Injection",
+  "difficulty": 2,
+  "seed": "api_generated_cmdi_001_1768499843",
+  "application": {
+    "context": "ping_utility",
+    "variant": "Direct Command Injection",
+    "entry_point": "http_get_param"
+  },
+  "constraints": {
+    "filters": [
+      {
+        "type": "semicolon",
+        "description": "Semicolon filtering",
+        "php_code": "$input = str_replace('s', '', $input);",
+        "python_code": "input = input.replace('s', '')"
+      }
+    ]
+  },
+  "flag": {
+    "content": "HACKFORGE{526bc73c5292a0566d7f7d33a174c929}",
+    "location": "/var/www/html/flag.txt"
+  },
+  "behavior": {
+    "output": "direct_echo"
+  },
+  "metadata": {
+    "exploit_hints": [
+      "Context: ping_utility",
+      "Difficulty: 2/5",
+      "\u26a0\ufe0f Filters active: semicolon",
+      "\ud83d\udca1 Try basic payloads first"
+    ],
+    "vulnerability_type": "Direct Command Injection",
+    "estimated_solve_time": "20-30 minutes"
+  }
+}

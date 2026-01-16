@@ -1,0 +1,39 @@
+{
+  "machine_id": "2097f66b4332c115",
+  "blueprint_id": "cmdi_002",
+  "variant": "Direct",
+  "difficulty": 2,
+  "seed": "api_generated_cmdi_002_1768499866",
+  "application": {
+    "context": "ping_utility",
+    "variant": "Direct ",
+    "entry_point": "http_post_param"
+  },
+  "constraints": {
+    "filters": [
+      {
+        "type": "pipe",
+        "description": "Pipe filtering",
+        "php_code": "$input = str_replace('p', '', $input);",
+        "python_code": "input = input.replace('p', '')"
+      }
+    ]
+  },
+  "flag": {
+    "content": "HACKFORGE{f3aba8f6b74cc8214e4613bb2842a1da}",
+    "location": "/var/www/html/flag.txt"
+  },
+  "behavior": {
+    "output": "direct_echo"
+  },
+  "metadata": {
+    "exploit_hints": [
+      "Context: ping_utility",
+      "Difficulty: 2/5",
+      "\u26a0\ufe0f Filters active: pipe",
+      "\ud83d\udca1 Try basic payloads first"
+    ],
+    "vulnerability_type": "Direct ",
+    "estimated_solve_time": "20-30 minutes"
+  }
+}

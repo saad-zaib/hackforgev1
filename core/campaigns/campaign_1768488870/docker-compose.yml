@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  ede42b9d75c01512:
+    build: ./ede42b9d75c01512
+    container_name: hackforge_ede42b9d75c01512
+    ports:
+      - "8080:80"
+    volumes:
+      - ./ede42b9d75c01512/app:/var/www/html
+      - ./ede42b9d75c01512/flag.txt:/var/www/html/flag.txt:ro
+    environment:
+      - MACHINE_ID=ede42b9d75c01512
+      - FLAG_LOCATION=/var/www/html/flag.txt
+    restart: unless-stopped
+
+  3d5f9d164747f455:
+    build: ./3d5f9d164747f455
+    container_name: hackforge_3d5f9d164747f455
+    ports:
+      - "8081:80"
+    volumes:
+      - ./3d5f9d164747f455/app:/var/www/html
+      - ./3d5f9d164747f455/flag.txt:/var/www/html/flag.txt:ro
+    environment:
+      - MACHINE_ID=3d5f9d164747f455
+      - FLAG_LOCATION=/var/www/html/flag.txt
+    restart: unless-stopped

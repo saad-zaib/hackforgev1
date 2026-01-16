@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  4ce80d7a5da8ab7e:
+    build: .
+    container_name: hackforge_4ce80d7a5da8ab7e
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./flag.txt:/var/www/html/flag.txt:ro
+    environment:
+      - MACHINE_ID=4ce80d7a5da8ab7e
+      - FLAG_LOCATION=/var/www/html/flag.txt
+    restart: unless-stopped

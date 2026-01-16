@@ -1,0 +1,10 @@
+Machine: 107068829071af0f
+Name: Unknown
+Variant: Encoded Path Traversal
+Difficulty: 2/5
+
+Hints:
+  • Context: file_viewer
+  • Difficulty: 2/5
+  • ⚠️ Filters active: dot_dot_slash
+  • 💡 Try basic payloads first

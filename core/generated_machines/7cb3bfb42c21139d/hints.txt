@@ -1,0 +1,10 @@
+Machine: 7cb3bfb42c21139d
+Name: Unknown
+Variant: Direct Command Injection
+Difficulty: 2/5
+
+Hints:
+  • Context: ping_utility
+  • Difficulty: 2/5
+  • ⚠️ Filters active: semicolon
+  • 💡 Try basic payloads first

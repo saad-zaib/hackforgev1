@@ -1,0 +1,58 @@
+2026-01-16 17:40:49,092 - INFO - Project root: /root/hackforge
+2026-01-16 17:40:49,092 - INFO - Core path: /root/hackforge/core
+2026-01-16 17:40:49,092 - INFO - Docker path: /root/hackforge/docker/orchestrator
+2026-01-16 17:40:49,263 - INFO - Orchestrator watching: /root/hackforge/core/generated_machines
+2026-01-16 17:40:49,273 - INFO - ✓ All components initialized
+INFO:     Started server process [1222]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1222]
+
+============================================================
+GENERATOR INITIALIZATION
+============================================================
+Core directory: /root/hackforge/core
+Blueprints directory: /root/hackforge/core/blueprints
+Mutations directory: /root/hackforge/core/mutations
+Blueprints exists: True
+Mutations exists: True
+============================================================
+
+  ✓ Loaded blueprint: SQL Injection (category: sql_injection)
+  ✓ Loaded blueprint: Path Traversal (category: path_traversal)
+  ✓ Loaded blueprint: Command (category: command_inject)
+  ✓ Loaded blueprint: Cross-Site Scripting (category: cross_site_scripting)
+  ✓ Loaded blueprint: Command Injection (category: command_injection)
+  ✓ Loaded mutation: PathTraversalMutation (category: path_traversal)
+  ✓ Loaded mutation: CommandInjectionMutation (category: command_injection)
+  ✓ Loaded mutation: CrossSiteScriptingMutation (category: cross_site_scripting)
+  ✓ Loaded mutation: CommandMutation (category: command_inject)
+  ✓ Loaded mutation: SqlInjectionMutation (category: sql_injection)
+✓ Loaded 5 blueprints
+✓ Loaded 5 mutation engines
+
+Blueprints loaded:
+  - sqli_001: SQL Injection (category: sql_injection)
+  - path_001: Path Traversal (category: path_traversal)
+  - cmdi_002: Command (category: command_inject)
+  - xss_001: Cross-Site Scripting (category: cross_site_scripting)
+  - cmdi_001: Command Injection (category: command_injection)
+
+Mutation engines loaded:
+  - path_traversal: PathTraversalMutation
+  - command_injection: CommandInjectionMutation
+  - cross_site_scripting: CrossSiteScriptingMutation
+  - command_inject: CommandMutation
+  - sql_injection: SqlInjectionMutation
+
+
+╔═══════════════════════════════════════════════════════════╗
+║          HACKFORGE WEB API WITH DATABASE                  ║
+╚═══════════════════════════════════════════════════════════╝
+
+Starting API server with MongoDB integration...
+    
